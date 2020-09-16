@@ -8,6 +8,7 @@ namespace NoWind.Data
     {
         ICustomerRepository Customers { get; }
         IEmployeeRepository Employees { get; }
+        IShipperRepository Shippers { get; }
         Task<int> CommitAsync();
     }
 }

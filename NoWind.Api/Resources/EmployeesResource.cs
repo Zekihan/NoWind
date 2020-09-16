@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace NoWind.Api.Resources
+﻿namespace NoWind.Api.Resources
 {
     public class EmployeesResource
     {

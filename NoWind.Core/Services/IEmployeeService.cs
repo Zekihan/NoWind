@@ -8,7 +8,7 @@ namespace NoWind.Core.Services
     {
         Task<IEnumerable<Employees>> GetAllEmployees();
         Task<Employees> GetEmployeesById(int id);
-        Task<IEnumerable<Employees>> GetEmployeesByBoss(int bossId); 
+        Task<IEnumerable<Employees>> GetEmployeesByBoss(int bossId);
         Task<Employees> CreateEmployees(Employees employee);
         Task UpdateEmployees(Employees employeeToBeUpdated, Employees employee);
         Task DeleteEmployees(Employees employee);

@@ -10,6 +10,7 @@ namespace NoWind.Data
         private readonly NorthwindContext _context;
         private CustomerRepository _customerRepository;
         private EmployeeRepository _employeeRepository;
+        private ShipperRepository _shipperRepository;
 
         public UnitOfWork(NorthwindContext context)
         {
@@ -18,6 +19,7 @@ namespace NoWind.Data
 
         public ICustomerRepository Customers => _customerRepository = _customerRepository ?? new CustomerRepository(_context);
         public IEmployeeRepository Employees => _employeeRepository = _employeeRepository ?? new EmployeeRepository(_context);
+        public IShipperRepository Shippers => _shipperRepository = _shipperRepository ?? new ShipperRepository(_context);
 
         public async Task<int> CommitAsync()
         {

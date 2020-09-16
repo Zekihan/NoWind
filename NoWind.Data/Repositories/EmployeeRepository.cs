@@ -1,10 +1,10 @@
-﻿using NoWind.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NoWind.Core.IRepositories;
+using NoWind.Core.Models;
 using NoWind.Data.Configurations;
 using System.Collections.Generic;
-using NoWind.Core.IRepositories;
-using System.Threading.Tasks;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace NoWind.Data.Repositories
 {

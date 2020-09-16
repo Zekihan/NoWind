@@ -1,9 +1,5 @@
 ﻿using FluentValidation;
 using NoWind.Api.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace NoWind.Api.Validations
 {
@@ -22,7 +18,7 @@ namespace NoWind.Api.Validations
                     .NotEmpty()
                     .WithMessage("Cannot to be emptyt.");
             }
-            else if (s == 0) 
+            else if (s == 0)
             {
                 RuleFor(a => a.EmployeeId)
                 .NotEmpty().WithMessage("Id cannot empty or 0");

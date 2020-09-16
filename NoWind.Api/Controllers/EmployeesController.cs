@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using NoWind.Api.Resources;
 using NoWind.Api.Validations;
 using NoWind.Core.Models;
 using NoWind.Core.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace NoWind.Api.Controllers
 {
@@ -26,7 +23,7 @@ namespace NoWind.Api.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<EmployeesResource>>> GetAllCustomers()
+        public async Task<ActionResult<IEnumerable<EmployeesResource>>> GetAllEmployees()
         {
             var employees = await _employeeService.GetAllEmployees();
             var employeesResources = _mapper.Map<IEnumerable<Employees>, IEnumerable<EmployeesResource>>(employees);
@@ -34,7 +31,7 @@ namespace NoWind.Api.Controllers
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<IEnumerable<EmployeesResource>>> GetCustomerById(int id)
+        public async Task<ActionResult<IEnumerable<EmployeesResource>>> GetEmployeeById(int id)
         {
             var employees = await _employeeService.GetEmployeesById(id);
             var employeesResources = _mapper.Map<Employees, EmployeesResource>(employees);
@@ -42,7 +39,7 @@ namespace NoWind.Api.Controllers
         }
 
         [HttpGet("bossId")]
-        public async Task<ActionResult<IEnumerable<EmployeesResource>>> GetCustomerByCountry(int bossId)
+        public async Task<ActionResult<IEnumerable<EmployeesResource>>> GetEmployeeByBoss(int bossId)
         {
             var employees = await _employeeService.GetEmployeesByBoss(bossId);
             var employeesResources = _mapper.Map<IEnumerable<Employees>, IEnumerable<EmployeesResource>>(employees);
