@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace NoWind.Core.IRespositories
+namespace NoWind.Core.IRepositories
 {
     public interface ICustomerRepository : IRepository<Customers>
     {

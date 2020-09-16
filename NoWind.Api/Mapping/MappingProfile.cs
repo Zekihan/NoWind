@@ -13,6 +13,12 @@ namespace NoWind.Api.Mapping
 
             // Resource to Domain
             CreateMap<CustomerResource, Customers>();
+
+            // Domain to Resource
+            CreateMap<Employees, EmployeesResource>();
+
+            // Resource to Domain
+            CreateMap<EmployeesResource, Employees>();
         }
     }
 }

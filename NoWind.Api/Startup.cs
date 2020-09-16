@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using NoWind.Core.Services;
 using NoWind.Data;
 using NoWind.Data.Configurations;
 using NoWind.Data.Services;
@@ -27,9 +28,13 @@ namespace NoWind.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             string connection = Configuration.GetConnectionString("Northwind");
             services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connection));
+
             services.AddTransient<ICustomersService, CustomerService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "NorthWind", Version = "v1" });

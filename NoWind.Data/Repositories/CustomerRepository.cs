@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NoWind.Core.IRespositories;
+using NoWind.Core.IRepositories;
 using NoWind.Core.Models;
 using NoWind.Data.Configurations;
 using System.Collections.Generic;

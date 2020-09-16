@@ -1,4 +1,4 @@
-﻿using NoWind.Core.IRespositories;
+﻿using NoWind.Core.IRepositories;
 using NoWind.Data.Configurations;
 using NoWind.Data.Repositories;
 using System.Threading.Tasks;
@@ -9,6 +9,7 @@ namespace NoWind.Data
     {
         private readonly NorthwindContext _context;
         private CustomerRepository _customerRepository;
+        private EmployeeRepository _employeeRepository;
 
         public UnitOfWork(NorthwindContext context)
         {
@@ -16,6 +17,7 @@ namespace NoWind.Data
         }
 
         public ICustomerRepository Customers => _customerRepository = _customerRepository ?? new CustomerRepository(_context);
+        public IEmployeeRepository Employees => _employeeRepository = _employeeRepository ?? new EmployeeRepository(_context);
 
         public async Task<int> CommitAsync()
         {

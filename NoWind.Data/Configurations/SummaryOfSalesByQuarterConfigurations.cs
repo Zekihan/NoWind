@@ -10,7 +10,7 @@ namespace NoWind.Data.Configurations
         {
             entity.HasNoKey();
 
-            entity.ToTable("Summary of Sales by Year");
+            entity.ToTable("Summary of Sales by Quarter");
 
             entity.Property(e => e.OrderId).HasColumnName("OrderID");
 

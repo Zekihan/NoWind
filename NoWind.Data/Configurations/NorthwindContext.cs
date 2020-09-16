@@ -42,7 +42,7 @@ namespace NoWind.Data.Configurations
         public virtual DbSet<SummaryOfSalesByQuarter> SummaryOfSalesByQuarter { get; set; }
         public virtual DbSet<SummaryOfSalesByYear> SummaryOfSalesByYear { get; set; }
         public virtual DbSet<Suppliers> Suppliers { get; set; }
-        public virtual DbSet<TerritoriesConfigurations> Territories { get; set; }
+        public virtual DbSet<Territories> Territories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -96,9 +96,9 @@ namespace NoWind.Data.Configurations
 
             modelBuilder.ApplyConfiguration(new ShippersConfigurations());
 
-            modelBuilder.ApplyConfiguration(new SummaryOfSalesByQuarterConfigurations());
-
             modelBuilder.ApplyConfiguration(new SummaryOfSalesByYearConfigurations());
+
+            modelBuilder.ApplyConfiguration(new SummaryOfSalesByQuarterConfigurations());
 
             modelBuilder.ApplyConfiguration(new SuppliersConfigurations());
 
