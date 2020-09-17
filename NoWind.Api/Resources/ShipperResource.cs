@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace NoWind.Core.Models
+﻿namespace NoWind.Api.Resources
 {
     public partial class ShipperResource
     {

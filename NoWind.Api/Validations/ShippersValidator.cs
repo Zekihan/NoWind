@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using NoWind.Core.Models;
+using NoWind.Api.Resources;
 
 namespace NoWind.Api.Validations
 {

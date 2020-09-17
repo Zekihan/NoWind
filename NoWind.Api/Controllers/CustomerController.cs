@@ -57,7 +57,7 @@ namespace NoWind.Api.Controllers
                 return BadRequest(validationResult.Errors);
 
             var customersResources = _mapper.Map<CustomerResource, Customers>(customer);
-            var customers = await _customersService.CreateCustomer(customersResources);
+            await _customersService.CreateCustomer(customersResources);
             return Ok(customersResources);
         }
 

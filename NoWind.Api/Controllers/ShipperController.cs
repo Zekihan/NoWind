@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using NoWind.Api.Resources;
 using NoWind.Api.Validations;
 using NoWind.Core.Models;
 using NoWind.Core.Services;

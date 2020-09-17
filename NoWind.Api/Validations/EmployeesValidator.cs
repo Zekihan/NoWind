@@ -3,9 +3,9 @@ using NoWind.Api.Resources;
 
 namespace NoWind.Api.Validations
 {
-    public class EmployessValidator : AbstractValidator<EmployeesResource>
+    public class EmployeesValidator : AbstractValidator<EmployeesResource>
     {
-        public EmployessValidator(int s)
+        public EmployeesValidator(int s)
         {
             if (s == 1)
             {

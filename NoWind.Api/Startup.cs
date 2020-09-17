@@ -34,6 +34,8 @@ namespace NoWind.Api
 
             services.AddTransient<ICustomersService, CustomerService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
+            services.AddTransient<IShipperService, ShipperService>();
+            services.AddTransient<IOrderService, OrderService>();
 
             services.AddSwaggerGen(options =>
             {

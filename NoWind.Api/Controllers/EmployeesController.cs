@@ -49,7 +49,7 @@ namespace NoWind.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<IEnumerable<EmployeesResource>>> CreateEmployee(EmployeesResource employee)
         {
-            var validator = new EmployessValidator(1);
+            var validator = new EmployeesValidator(1);
             var validationResult = await validator.ValidateAsync(employee);
 
             if (!validationResult.IsValid)
@@ -73,7 +73,7 @@ namespace NoWind.Api.Controllers
         [HttpPut("id")]
         public async Task<ActionResult<IEnumerable<EmployeesResource>>> UpdateCustomer(int id, EmployeesResource employee)
         {
-            var validator = new EmployessValidator(0);
+            var validator = new EmployeesValidator(0);
             var validationResult = await validator.ValidateAsync(employee);
 
             if (!validationResult.IsValid)
