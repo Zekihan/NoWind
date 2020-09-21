@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 using NoWind.Core.Models;
 
 namespace NoWind.Api.Mapping
@@ -8,29 +8,29 @@ namespace NoWind.Api.Mapping
     {
         public MappingProfile()
         {
-            // Domain to Resource
-            CreateMap<Customers, CustomerResource>();
+            // Customer Domain to Resource
+            CreateMap<Customers, CustomerAPIModel>();
 
-            // Resource to Domain
-            CreateMap<CustomerResource, Customers>();
+            // Customer Resource to Domain
+            CreateMap<CustomerAPIModel, Customers>();
 
-            // Domain to Resource
-            CreateMap<Employees, EmployeesResource>();
+            // Employee Domain to Resource
+            CreateMap<Employees, EmployeeAPIModel>();
 
-            // Resource to Domain
-            CreateMap<EmployeesResource, Employees>();
+            // Employee Resource to Domain
+            CreateMap<EmployeeAPIModel, Employees>();
 
-            // Domain to Resource
-            CreateMap<Shippers, ShipperResource>();
+            // Shipper Domain to Resource
+            CreateMap<Shippers, ShipperAPIModel>();
 
-            // Resource to Domain
-            CreateMap<ShipperResource, Shippers>();
+            // Shipper Resource to Domain
+            CreateMap<ShipperAPIModel, Shippers>();
 
-            // Domain to Resource
-            CreateMap<Orders, OrderResource>();
+            // Order Domain to Resource
+            CreateMap<Orders, OrderAPIModel>();
 
-            // Resource to Domain
-            CreateMap<OrderResource, Orders>();
+            // Order Resource to Domain
+            CreateMap<OrderAPIModel, Orders>();
         }
     }
 }

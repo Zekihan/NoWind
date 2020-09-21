@@ -39,7 +39,7 @@ namespace NoWind.Services
 
         public async Task<IEnumerable<Customers>> GetCustomersByCountry(string country)
         {
-            return await _unitOfWork.Customers.GetCustomerByCountryAsync(country);
+            return await _unitOfWork.Customers.GetCustomersByCountryAsync(country);
         }
 
         public async Task UpdateCustomer(Customers customerToBeUpdated, Customers customers)

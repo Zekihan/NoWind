@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 
 namespace NoWind.Api.Validations
 {
-    public class EmployeesValidator : AbstractValidator<EmployeesResource>
+    public class EmployeeValidator : AbstractValidator<EmployeeAPIModel>
     {
-        public EmployeesValidator(int s)
+        public EmployeeValidator(int s)
         {
             if (s == 1)
             {

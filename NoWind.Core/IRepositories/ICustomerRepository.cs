@@ -8,6 +8,6 @@ namespace NoWind.Core.IRepositories
     {
         Task<IEnumerable<Customers>> GetAllCustomersAsync();
         Task<Customers> GetCustomerByIdAsync(string id);
-        Task<IEnumerable<Customers>> GetCustomerByCountryAsync(string country);
+        Task<IEnumerable<Customers>> GetCustomersByCountryAsync(string country);
     }
 }

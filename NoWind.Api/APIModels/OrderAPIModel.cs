@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NoWind.Api.Resources
+namespace NoWind.Api.APIModels
 {
-    public partial class OrderResource
+    public class OrderAPIModel
     {
         public int OrderId { get; set; }
         public string CustomerId { get; set; }
@@ -18,9 +18,5 @@ namespace NoWind.Api.Resources
         public string ShipRegion { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
-
-        public virtual CustomerResource Customer { get; set; }
-        public virtual EmployeesResource Employee { get; set; }
-        public virtual ShipperResource ShipViaNavigation { get; set; }
     }
 }

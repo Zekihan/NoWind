@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 
 namespace NoWind.Api.Validations
 {
-    public class CustomerValidator : AbstractValidator<CustomerResource>
+    public class CustomerValidator : AbstractValidator<CustomerAPIModel>
     {
         public CustomerValidator()
         {

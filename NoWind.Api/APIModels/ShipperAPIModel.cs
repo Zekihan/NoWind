@@ -1,6 +1,6 @@
-﻿namespace NoWind.Api.Resources
+﻿namespace NoWind.Api.APIModels
 {
-    public partial class ShipperResource
+    public class ShipperAPIModel
     {
         public int ShipperId { get; set; }
         public string CompanyName { get; set; }

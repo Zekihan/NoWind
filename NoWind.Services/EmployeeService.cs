@@ -32,7 +32,7 @@ namespace NoWind.Services
             return await _unitOfWork.Employees.GetAllAsync();
         }
 
-        public async Task<Employees> GetEmployeesById(int id)
+        public async Task<Employees> GetEmployeeById(int id)
         {
             return await _unitOfWork.Employees.GetEmployeeByIdAsync(id);
         }

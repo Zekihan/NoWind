@@ -8,8 +8,8 @@ namespace NoWind.Core.Services
     {
         Task<IEnumerable<Orders>> GetAllOrders();
         Task<Orders> GetOrderById(int id);
-        Task<IEnumerable<Orders>> GetOrderByEmployeeId(int employeeId);
-        Task<IEnumerable<Orders>> GetOrderByCustomerId(string customerId);
+        Task<IEnumerable<Orders>> GetOrdersByEmployeeId(int employeeId);
+        Task<IEnumerable<Orders>> GetOrdersByCustomerId(string customerId);
         Task<Orders> CreateOrder(Orders order);
         Task UpdateOrder(Orders orderToBeUpdated, Orders order);
         Task DeleteOrder(Orders order);

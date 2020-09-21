@@ -37,14 +37,14 @@ namespace NoWind.Services
             return await _unitOfWork.Orders.GetOrderByIdAsync(id);
         }
 
-        public async Task<IEnumerable<Orders>> GetOrderByCustomerId(string customerId)
+        public async Task<IEnumerable<Orders>> GetOrdersByCustomerId(string customerId)
         {
-            return await _unitOfWork.Orders.GetOrderByCustomerIdAsync(customerId);
+            return await _unitOfWork.Orders.GetOrdersByCustomerIdAsync(customerId);
         }
 
-        public async Task<IEnumerable<Orders>> GetOrderByEmployeeId(int employeeId)
+        public async Task<IEnumerable<Orders>> GetOrdersByEmployeeId(int employeeId)
         {
-            return await _unitOfWork.Orders.GetOrderByEmployeeIdAsync(employeeId);
+            return await _unitOfWork.Orders.GetOrdersByEmployeeIdAsync(employeeId);
         }
 
         public async Task UpdateOrder(Orders orderToBeUpdated, Orders order)

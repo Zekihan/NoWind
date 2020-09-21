@@ -1,6 +1,6 @@
-﻿namespace NoWind.Api.Resources
+﻿namespace NoWind.Api.APIModels
 {
-    public class CustomerResource
+    public class CustomerAPIModel
     {
         public string CustomerId { get; set; }
         public string CompanyName { get; set; }

@@ -27,7 +27,7 @@ namespace NoWind.Data.Repositories
                 .SingleOrDefaultAsync(a => a.CustomerId == id);
         }
 
-        public async Task<IEnumerable<Customers>> GetCustomerByCountryAsync(string country)
+        public async Task<IEnumerable<Customers>> GetCustomersByCountryAsync(string country)
         {
             return await NorthwindContext.Customers
                 .Where(a => a.Country == country)

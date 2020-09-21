@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 
 namespace NoWind.Api.Validations
 {
-    public class ShippersValidator : AbstractValidator<ShipperResource>
+    public class ShipperValidator : AbstractValidator<ShipperAPIModel>
     {
-        public ShippersValidator()
+        public ShipperValidator()
         {
             RuleFor(a => a.CompanyName)
                     .NotEmpty()

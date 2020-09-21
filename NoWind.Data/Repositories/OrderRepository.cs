@@ -21,14 +21,14 @@ namespace NoWind.Data.Repositories
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Orders>> GetOrderByCustomerIdAsync(string customerId)
+        public async Task<IEnumerable<Orders>> GetOrdersByCustomerIdAsync(string customerId)
         {
             return await NorthwindContext.Orders
                 .Where(a => a.CustomerId == customerId)
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Orders>> GetOrderByEmployeeIdAsync(int employeeId)
+        public async Task<IEnumerable<Orders>> GetOrdersByEmployeeIdAsync(int employeeId)
         {
             return await NorthwindContext.Orders
                 .Where(a => a.EmployeeId == employeeId)

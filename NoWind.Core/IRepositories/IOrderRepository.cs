@@ -8,7 +8,7 @@ namespace NoWind.Core.IRepositories
     {
         Task<IEnumerable<Orders>> GetAllOrdersAsync();
         Task<Orders> GetOrderByIdAsync(int id);
-        Task<IEnumerable<Orders>> GetOrderByCustomerIdAsync(string customerId);
-        Task<IEnumerable<Orders>> GetOrderByEmployeeIdAsync(int employeeId);
+        Task<IEnumerable<Orders>> GetOrdersByCustomerIdAsync(string customerId);
+        Task<IEnumerable<Orders>> GetOrdersByEmployeeIdAsync(int employeeId);
     }
 }

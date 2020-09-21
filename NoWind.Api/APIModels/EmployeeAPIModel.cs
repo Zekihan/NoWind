@@ -1,6 +1,6 @@
-﻿namespace NoWind.Api.Resources
+﻿namespace NoWind.Api.APIModels
 {
-    public class EmployeesResource
+    public class EmployeeAPIModel
     {
         public int EmployeeId { get; set; }
         public string LastName { get; set; }

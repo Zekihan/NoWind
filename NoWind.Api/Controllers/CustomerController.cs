@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 using NoWind.Api.Validations;
 using NoWind.Core.Models;
 using NoWind.Data.Services;
@@ -24,31 +24,31 @@ namespace NoWind.Api.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<CustomerResource>>> GetAllCustomers()
+        public async Task<ActionResult<IEnumerable<CustomerAPIModel>>> GetAllCustomers()
         {
             var customers = await _customersService.GetAllCustomers();
-            var customersResources = _mapper.Map<IEnumerable<Customers>, IEnumerable<CustomerResource>>(customers);
-            return Ok(customersResources);
+            var customersAPIModel = _mapper.Map<IEnumerable<Customers>, IEnumerable<CustomerAPIModel>>(customers);
+            return Ok(customersAPIModel);
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<IEnumerable<CustomerResource>>> GetCustomerById(string id)
+        public async Task<ActionResult<CustomerAPIModel>> GetCustomerById(string id)
         {
-            var customers = await _customersService.GetCustomerById(id);
-            var customersResources = _mapper.Map<Customers, CustomerResource>(customers);
-            return Ok(customersResources);
+            var customer = await _customersService.GetCustomerById(id);
+            var customerAPIModel = _mapper.Map<Customers, CustomerAPIModel>(customer);
+            return Ok(customerAPIModel);
         }
 
         [HttpGet("country")]
-        public async Task<ActionResult<IEnumerable<CustomerResource>>> GetCustomerByCountry(string country)
+        public async Task<ActionResult<IEnumerable<CustomerAPIModel>>> GetCustomersByCountry(string country)
         {
             var customers = await _customersService.GetCustomersByCountry(country);
-            var customersResources = _mapper.Map<IEnumerable<Customers>, IEnumerable<CustomerResource>>(customers);
-            return Ok(customersResources);
+            var customersAPIModel = _mapper.Map<IEnumerable<Customers>, IEnumerable<CustomerAPIModel>>(customers);
+            return Ok(customersAPIModel);
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<CustomerResource>>> CreateCustomer(CustomerResource customer)
+        public async Task<ActionResult<CustomerAPIModel>> CreateCustomer(CustomerAPIModel customer)
         {
             var validator = new CustomerValidator();
             var validationResult = await validator.ValidateAsync(customer);
@@ -56,23 +56,23 @@ namespace NoWind.Api.Controllers
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
 
-            var customersResources = _mapper.Map<CustomerResource, Customers>(customer);
-            await _customersService.CreateCustomer(customersResources);
-            return Ok(customersResources);
+            var customerModel = _mapper.Map<CustomerAPIModel, Customers>(customer);
+            await _customersService.CreateCustomer(customerModel);
+            return Ok(customer);
         }
 
         [HttpDelete("id")]
-        public async Task<ActionResult<IEnumerable<CustomerResource>>> DeleteCustomer(string id)
+        public async Task<ActionResult<CustomerAPIModel>> DeleteCustomer(string id)
         {
             var customerToBeDeleted = await _customersService.GetCustomerById(id);
-            var customersResources = _mapper.Map<Customers, CustomerResource>(customerToBeDeleted);
+            var customerAPIModel = _mapper.Map<Customers, CustomerAPIModel>(customerToBeDeleted);
 
             await _customersService.DeleteCustomer(customerToBeDeleted);
-            return Ok(customersResources);
+            return Ok(customerAPIModel);
         }
 
         [HttpPut("id")]
-        public async Task<ActionResult<IEnumerable<CustomerResource>>> UpdateCustomer(string id, CustomerResource customer)
+        public async Task<ActionResult<CustomerAPIModel>> UpdateCustomer(string id, CustomerAPIModel customer)
         {
             var validator = new CustomerValidator();
             var validationResult = await validator.ValidateAsync(customer);
@@ -85,14 +85,14 @@ namespace NoWind.Api.Controllers
             if (customerToUpdate == null)
                 return NotFound();
 
-            var customers = _mapper.Map<CustomerResource, Customers>(customer);
+            var customerModel = _mapper.Map<CustomerAPIModel, Customers>(customer);
 
-            await _customersService.UpdateCustomer(customerToUpdate, customers);
+            await _customersService.UpdateCustomer(customerToUpdate, customerModel);
 
-            var result = await _customersService.GetCustomerById(id);
-            var res = _mapper.Map<Customers, CustomerResource>(result);
+            customerModel = await _customersService.GetCustomerById(id);
+            customer = _mapper.Map<Customers, CustomerAPIModel>(customerModel);
 
-            return Ok(res);
+            return Ok(customer);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 using NoWind.Api.Validations;
 using NoWind.Core.Models;
 using NoWind.Core.Services;
@@ -23,49 +23,49 @@ namespace NoWind.Api.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<ShipperResource>>> GetAllshippers()
+        public async Task<ActionResult<IEnumerable<ShipperAPIModel>>> GetAllShippers()
         {
-            var shipper = await _shipperService.GetAllShippers();
-            var shipperResources = _mapper.Map<IEnumerable<Shippers>, IEnumerable<ShipperResource>>(shipper);
-            return Ok(shipperResources);
+            var shippers = await _shipperService.GetAllShippers();
+            var shippersAPIModel = _mapper.Map<IEnumerable<Shippers>, IEnumerable<ShipperAPIModel>>(shippers);
+            return Ok(shippersAPIModel);
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<IEnumerable<ShipperResource>>> GetshipperById(int id)
+        public async Task<ActionResult<ShipperAPIModel>> GetShipperById(int id)
         {
             var shipper = await _shipperService.GetShipperById(id);
-            var shipperResources = _mapper.Map<Shippers, ShipperResource>(shipper);
-            return Ok(shipperResources);
+            var shipperAPIModel = _mapper.Map<Shippers, ShipperAPIModel>(shipper);
+            return Ok(shipperAPIModel);
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<ShipperResource>>> CreateShipper(ShipperResource shipper)
+        public async Task<ActionResult<ShipperAPIModel>> CreateShipper(ShipperAPIModel shipper)
         {
-            var validator = new ShippersValidator();
+            var validator = new ShipperValidator();
             var validationResult = await validator.ValidateAsync(shipper);
 
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
 
-            var shippers = _mapper.Map<ShipperResource, Shippers>(shipper);
-            var shipperResources = await _shipperService.CreateShipper(shippers);
-            return Ok(shipperResources);
+            var shippers = _mapper.Map<ShipperAPIModel, Shippers>(shipper);
+            var shipperAPIModel = await _shipperService.CreateShipper(shippers);
+            return Ok(shipperAPIModel);
         }
 
         [HttpDelete("id")]
-        public async Task<ActionResult<IEnumerable<ShipperResource>>> DeleteShipper(int id)
+        public async Task<ActionResult<ShipperAPIModel>> DeleteShipper(int id)
         {
             var shipperToBeDeleted = await _shipperService.GetShipperById(id);
-            var shipperResource = _mapper.Map<Shippers, ShipperResource>(shipperToBeDeleted);
+            var shipperAPIModel = _mapper.Map<Shippers, ShipperAPIModel>(shipperToBeDeleted);
 
             await _shipperService.DeleteShipper(shipperToBeDeleted);
-            return Ok(shipperResource);
+            return Ok(shipperAPIModel);
         }
 
         [HttpPut("id")]
-        public async Task<ActionResult<IEnumerable<ShipperResource>>> UpdateShipper(int id, ShipperResource shipper)
+        public async Task<ActionResult<ShipperAPIModel>> UpdateShipper(int id, ShipperAPIModel shipper)
         {
-            var validator = new ShippersValidator();
+            var validator = new ShipperValidator();
             var validationResult = await validator.ValidateAsync(shipper);
 
             if (!validationResult.IsValid)
@@ -76,14 +76,14 @@ namespace NoWind.Api.Controllers
             if (shipperToUpdate == null)
                 return NotFound();
 
-            var shippers = _mapper.Map<ShipperResource, Shippers>(shipper);
+            var shipperModel = _mapper.Map<ShipperAPIModel, Shippers>(shipper);
 
-            await _shipperService.UpdateShipper(shipperToUpdate, shippers);
+            await _shipperService.UpdateShipper(shipperToUpdate, shipperModel);
 
-            var result = await _shipperService.GetShipperById(id);
-            var res = _mapper.Map<Shippers, ShipperResource>(result);
+            shipperModel = await _shipperService.GetShipperById(id);
+            var shipperAPIModel = _mapper.Map<Shippers, ShipperAPIModel>(shipperModel);
 
-            return Ok(res);
+            return Ok(shipperAPIModel);
         }
     }
 }

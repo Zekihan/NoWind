@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using NoWind.Api.Resources;
+using NoWind.Api.APIModels;
 using NoWind.Api.Validations;
 using NoWind.Core.Models;
 using NoWind.Core.Services;
@@ -23,39 +23,39 @@ namespace NoWind.Api.Controllers
         }
 
         [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<OrderResource>>> GetAllOrders()
+        public async Task<ActionResult<IEnumerable<OrderAPIModel>>> GetAllOrders()
         {
-            var order = await _orderService.GetAllOrders();
-            var orderResources = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrderResource>>(order);
-            return Ok(orderResources);
+            var orders = await _orderService.GetAllOrders();
+            var ordersAPIModel = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrderAPIModel>>(orders);
+            return Ok(ordersAPIModel);
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<OrderResource>> GetOrderById(int id)
+        public async Task<ActionResult<OrderAPIModel>> GetOrderById(int id)
         {
             var order = await _orderService.GetOrderById(id);
-            var orderResources = _mapper.Map<Orders, OrderResource>(order);
-            return Ok(orderResources);
+            var orderAPIModel = _mapper.Map<Orders, OrderAPIModel>(order);
+            return Ok(orderAPIModel);
         }
 
         [HttpGet("customerId")]
-        public async Task<ActionResult<IEnumerable<OrderResource>>> GetOrderByCustomerId(string customerId)
+        public async Task<ActionResult<IEnumerable<OrderAPIModel>>> GetOrdersByCustomerId(string customerId)
         {
-            var order = await _orderService.GetOrderByCustomerId(customerId);
-            var orderResources = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrderResource>>(order);
-            return Ok(orderResources);
+            var orders = await _orderService.GetOrdersByCustomerId(customerId);
+            var ordersAPIModel = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrderAPIModel>>(orders);
+            return Ok(ordersAPIModel);
         }
 
         [HttpGet("employeeId")]
-        public async Task<ActionResult<IEnumerable<OrderResource>>> GetOrderByEmployeeId(int employeeId)
+        public async Task<ActionResult<IEnumerable<OrderAPIModel>>> GetOrdersByEmployeeId(int employeeId)
         {
-            var order = await _orderService.GetOrderByEmployeeId(employeeId);
-            var orderResources = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrderResource>>(order);
-            return Ok(orderResources);
+            var orders = await _orderService.GetOrdersByEmployeeId(employeeId);
+            var ordersAPIModel = _mapper.Map<IEnumerable<Orders>, IEnumerable<OrderAPIModel>>(orders);
+            return Ok(ordersAPIModel);
         }
 
         [HttpPost]
-        public async Task<ActionResult<IEnumerable<OrderResource>>> CreateOrder(OrderResource order)
+        public async Task<ActionResult<OrderAPIModel>> CreateOrder(OrderAPIModel order)
         {
             var validator = new OrderValidator();
             var validationResult = await validator.ValidateAsync(order);
@@ -63,23 +63,25 @@ namespace NoWind.Api.Controllers
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
 
-            var orders = _mapper.Map<OrderResource, Orders>(order);
-            var orderResources = await _orderService.CreateOrder(orders);
-            return Ok(orderResources);
+            var orderModel = _mapper.Map<OrderAPIModel, Orders>(order);
+            var orderAPIModel = await _orderService.CreateOrder(orderModel);
+            return Ok(orderAPIModel);
         }
 
         [HttpDelete("id")]
-        public async Task<ActionResult<IEnumerable<OrderResource>>> DeleteOrder(int id)
+        public async Task<ActionResult<OrderAPIModel>> DeleteOrder(int id)
         {
             var orderToBeDeleted = await _orderService.GetOrderById(id);
-            var orderResource = _mapper.Map<Orders, OrderResource>(orderToBeDeleted);
+            if (orderToBeDeleted == null)
+                return NotFound();
+            var orderAPIModel = _mapper.Map<Orders, OrderAPIModel>(orderToBeDeleted);
 
             await _orderService.DeleteOrder(orderToBeDeleted);
-            return Ok(orderResource);
+            return Ok(orderAPIModel);
         }
 
         [HttpPut("id")]
-        public async Task<ActionResult<IEnumerable<OrderResource>>> UpdateOrder(int id, OrderResource order)
+        public async Task<ActionResult<OrderAPIModel>> UpdateOrder(int id, OrderAPIModel order)
         {
             var validator = new OrderValidator();
             var validationResult = await validator.ValidateAsync(order);
@@ -92,14 +94,14 @@ namespace NoWind.Api.Controllers
             if (orderToUpdate == null)
                 return NotFound();
 
-            var orders = _mapper.Map<OrderResource, Orders>(order);
+            var orderModel = _mapper.Map<OrderAPIModel, Orders>(order);
 
-            await _orderService.UpdateOrder(orderToUpdate, orders);
+            await _orderService.UpdateOrder(orderToUpdate, orderModel);
 
-            var result = await _orderService.GetOrderById(id);
-            var res = _mapper.Map<Orders, OrderResource>(result);
+            orderModel = await _orderService.GetOrderById(id);
+            var orderAPIModel = _mapper.Map<Orders, OrderAPIModel>(orderModel);
 
-            return Ok(res);
+            return Ok(orderAPIModel);
         }
     }
 }
